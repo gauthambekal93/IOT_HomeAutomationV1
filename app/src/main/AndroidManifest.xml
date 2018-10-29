@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.gauth.iot_homeautomationv1">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".Registration" />
+        <activity android:name=".HomePage" />
+        <activity android:name=".SecuritySystem" />
+        <activity android:name=".GarageDoors" />
+        <activity android:name=".Thermostate" />
+        <activity android:name=".Lights" />
+        <activity android:name=".LiveFeed" />
+        <activity android:name=".Locks" />
+        <activity android:name=".Weather" />
+        <activity android:name=".Window" />
+        <activity android:name=".MotionDetector" />
+        <activity android:name=".ElectricAppliance" />
+        <activity android:name=".AccountSettings" />
+        <activity android:name=".UtilityHomePage" />
+        <activity android:name=".PowerHomePage"></activity>
+    </application>
+
+</manifest>

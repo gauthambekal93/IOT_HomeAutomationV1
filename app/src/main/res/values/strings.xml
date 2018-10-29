@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">IOT_HomeAutomationV1</string>
+    <string name="title_activity_thermostate">Thermostate</string>
+    <string name="title_activity_lights">Lights</string>
+</resources>
