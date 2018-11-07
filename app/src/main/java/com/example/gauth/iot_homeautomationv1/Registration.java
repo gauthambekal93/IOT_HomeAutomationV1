@@ -10,7 +10,20 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Registration extends AppCompatActivity {
 
@@ -41,19 +54,74 @@ public class Registration extends AppCompatActivity {
 
                 if (role.getSelectedItem().toString().equals("Consumer"))
                 {
-                    startActivity(new Intent(getBaseContext(), HomePage.class));
+                    Toast.makeText(getBaseContext(),"Consumer clicked",Toast.LENGTH_SHORT).show();
+                    registerUser("Consumer");
                 }
                 if (role.getSelectedItem().toString().equals("Utility"))
-                {
-                    startActivity(new Intent(getBaseContext(), UtilityHomePage.class));
+                {Toast.makeText(getBaseContext(),"Utility clicked",Toast.LENGTH_SHORT).show();
+                    registerUser("Utility");
                 }
                 if (role.getSelectedItem().toString().equals("Power Generator"))
-                {
-                    startActivity(new Intent(getBaseContext(), PowerHomePage.class));
+                    Toast.makeText(getBaseContext(),"Power Generator clicked",Toast.LENGTH_SHORT).show();
+                {registerUser("Power Generator");
                 }
             }
         });
-
-
     }
+
+public  void registerUser(final String role)
+{
+    StringRequest stringRequest = new StringRequest(Request.Method.POST,
+            Constants.URL_REGISTER,
+            new Response.Listener<String>() {
+
+                @Override
+                public void onResponse(String response) {
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+                           if(jsonObject.getString("message").equals("User registered successfully"))
+                        {
+                            //Toast.makeText(getApplicationContext(), jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(),jsonObject.getString("error"),Toast.LENGTH_SHORT).show();
+                            if (role.equals("Consumer")) {
+                                startActivity(new Intent(getBaseContext(), HomePage.class));
+                            }
+                            if (role.equals("Utility")) {
+                                startActivity(new Intent(getBaseContext(), UtilityHomePage.class));
+                            }
+                            if (role.equals("Power Generator")) {
+                                startActivity(new Intent(getBaseContext(), PowerHomePage.class));
+                            }
+                        }
+                        else{
+                               Toast.makeText(getApplicationContext(),jsonObject.getString("error"),Toast.LENGTH_SHORT).show();
+                              //Toast.makeText(getApplicationContext(), jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
+                           }
+                    }
+                catch (Exception e) {
+                            e.printStackTrace();
+                        }
+            }
+
+            },
+            new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(getBaseContext(),"Unsucessfully Registration",Toast.LENGTH_SHORT).show();
+                }
+            })
+    {
+        @Override
+        protected Map<String, String> getParams() throws AuthFailureError {
+            Map<String,String> params =new HashMap<>();
+            params.put("username",username.getText().toString());
+            params.put("password",password.getText().toString());
+            params.put("name",profileName.getText().toString());
+            params.put("role",role);
+return  params;
+        }
+    };
+    RequestHandler.getInstance(this).addToRequestQueue(stringRequest);
+}
+
 }

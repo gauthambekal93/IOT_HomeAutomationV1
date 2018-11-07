@@ -8,6 +8,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class MainActivity extends AppCompatActivity {
 EditText username;
 EditText password;
@@ -26,8 +37,9 @@ signUp= (Button)findViewById(R.id.register);
 login.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View view) {
-        Toast.makeText(getApplicationContext(),"Logged In",Toast.LENGTH_SHORT).show();
-        startActivity(new Intent(getBaseContext(),HomePage.class));
+
+        //ADD THE API CALLING HERE
+         loginUser("Consumer");
     }
 });
 
@@ -38,5 +50,56 @@ signUp.setOnClickListener(new View.OnClickListener() {
         startActivity(new Intent(getBaseContext(),Registration.class));
     }
 });
+    }
+
+    public  void loginUser(final String role)
+    {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,
+                Constants.URL_LOGIN,
+                new Response.Listener<String>() {
+
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            if(jsonObject.getString("message").equals("Welcome Back!"))
+                            {
+
+                                if (role.equals("Consumer")) {
+                                    Toast.makeText(getApplicationContext(),"WELCOME BACK!",Toast.LENGTH_SHORT).show();
+                                    startActivity(new Intent(getBaseContext(), HomePage.class));
+                                }
+                                if (role.equals("Utility")) {
+                                    startActivity(new Intent(getBaseContext(), UtilityHomePage.class));
+                                }
+                                if (role.equals("Power Generator")) {
+                                    startActivity(new Intent(getBaseContext(), PowerHomePage.class));
+                                }
+                            }
+                            else{
+                                Toast.makeText(getApplicationContext(),"INCORRECT USERNAME OR PASSWORD!",Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                        catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getBaseContext(),"Unsucessfully Registration",Toast.LENGTH_SHORT).show();
+                    }
+                })
+        {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params =new HashMap<>();
+                params.put("username",username.getText().toString());
+                params.put("password",password.getText().toString());
+                return  params;
+            }
+        };
+        RequestHandler.getInstance(this).addToRequestQueue(stringRequest);
     }
 }

@@ -3,6 +3,7 @@ package com.example.gauth.iot_homeautomationv1;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -15,11 +16,12 @@ public class Locks extends AppCompatActivity {
     Button locked;
     Button unlocked;
     ArrayList<String> doorType= new ArrayList<String>();
+    ArrayAdapter<String> spinAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_locks);
-
+        spinAdapter = new ArrayAdapter<String>(getBaseContext(),android.R.layout.simple_spinner_item,doorType);
         door=(Spinner)findViewById(R.id.door);
         locked=(Button)findViewById(R.id.locked);
         unlocked=(Button)findViewById(R.id.unlocked);
@@ -28,6 +30,7 @@ public class Locks extends AppCompatActivity {
         doorType.add("Front Door");
         doorType.add("Back Door");
         doorType.add("Garage Door");
+        door.setAdapter(spinAdapter);
 
         locked.setOnClickListener(new View.OnClickListener() {
             @Override

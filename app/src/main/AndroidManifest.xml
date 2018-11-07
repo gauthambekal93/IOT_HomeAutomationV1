@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.gauth.iot_homeautomationv1">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -20,7 +22,7 @@
         <activity android:name=".HomePage" />
         <activity android:name=".SecuritySystem" />
         <activity android:name=".GarageDoors" />
-        <activity android:name=".Thermostate" />
+        <activity android:name=".Thermostat" />
         <activity android:name=".Lights" />
         <activity android:name=".LiveFeed" />
         <activity android:name=".Locks" />

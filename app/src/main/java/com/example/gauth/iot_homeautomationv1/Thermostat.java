@@ -10,7 +10,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class Thermostate extends AppCompatActivity {
+public class Thermostat extends AppCompatActivity {
     Spinner mainDoor;
     Spinner floorMode;
     Spinner fan;

@@ -22,7 +22,7 @@ public class HomePage extends AppCompatActivity {
         dropDown.add("");
         dropDown.add("Security System");
         dropDown.add("Garage Door");
-        dropDown.add("Thermostate");
+        dropDown.add("Thermostat");
         dropDown.add("Lights");
         dropDown.add("Video");
         dropDown.add("Locks");
@@ -50,9 +50,9 @@ public class HomePage extends AppCompatActivity {
                 {
                     startActivity(new Intent(getBaseContext(),GarageDoors.class));
                 }
-                if(spin.getSelectedItem().toString().equals("Thermostate"))
+                if(spin.getSelectedItem().toString().equals("Thermostat"))
                 {
-                    startActivity(new Intent(getBaseContext(),Thermostate.class));
+                    startActivity(new Intent(getBaseContext(),Thermostat.class));
                 }
                 if(spin.getSelectedItem().toString().equals("Lights"))
                 {
