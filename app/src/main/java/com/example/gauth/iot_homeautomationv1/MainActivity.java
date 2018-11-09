@@ -39,7 +39,7 @@ login.setOnClickListener(new View.OnClickListener() {
     public void onClick(View view) {
 
         //ADD THE API CALLING HERE
-         loginUser("Consumer");
+         loginUser();
     }
 });
 
@@ -52,7 +52,7 @@ signUp.setOnClickListener(new View.OnClickListener() {
 });
     }
 
-    public  void loginUser(final String role)
+    public  void loginUser()
     {
         StringRequest stringRequest = new StringRequest(Request.Method.POST,
                 Constants.URL_LOGIN,
@@ -62,17 +62,21 @@ signUp.setOnClickListener(new View.OnClickListener() {
                     public void onResponse(String response) {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
+
                             if(jsonObject.getString("message").equals("Welcome Back!"))
                             {
+                                String Role = jsonObject.getString("role");
 
-                                if (role.equals("Consumer")) {
+                                if (Role.equals("Consumer")) {
                                     Toast.makeText(getApplicationContext(),"WELCOME BACK!",Toast.LENGTH_SHORT).show();
                                     startActivity(new Intent(getBaseContext(), HomePage.class));
                                 }
-                                if (role.equals("Utility")) {
+                                if (Role.equals("Utility")) {
+                                    Toast.makeText(getApplicationContext(),"WELCOME BACK!",Toast.LENGTH_SHORT).show();
                                     startActivity(new Intent(getBaseContext(), UtilityHomePage.class));
                                 }
-                                if (role.equals("Power Generator")) {
+                                if (Role.equals("Power Generator")) {
+                                    Toast.makeText(getApplicationContext(),"WELCOME BACK!",Toast.LENGTH_SHORT).show();
                                     startActivity(new Intent(getBaseContext(), PowerHomePage.class));
                                 }
                             }
