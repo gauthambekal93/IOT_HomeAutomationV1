@@ -66,9 +66,10 @@ signUp.setOnClickListener(new View.OnClickListener() {
                             if(jsonObject.getString("message").equals("Welcome Back!"))
                             {
                                 String Role = jsonObject.getString("role");
+                                Constants.username=jsonObject.getString("username");
 
                                 if (Role.equals("Consumer")) {
-                                    Toast.makeText(getApplicationContext(),"WELCOME BACK!",Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getApplicationContext(),"WELCOME BACK "+Constants.username,Toast.LENGTH_SHORT).show();
                                     startActivity(new Intent(getBaseContext(), HomePage.class));
                                 }
                                 if (Role.equals("Utility")) {

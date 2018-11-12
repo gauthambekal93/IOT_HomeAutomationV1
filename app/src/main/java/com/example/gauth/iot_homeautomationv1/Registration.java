@@ -83,6 +83,8 @@ public  void registerUser(final String role)
                         {
                             //Toast.makeText(getApplicationContext(), jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
                             Toast.makeText(getApplicationContext(),jsonObject.getString("error"),Toast.LENGTH_SHORT).show();
+                            Constants.username = username.getText().toString();
+
                             if (role.equals("Consumer")) {
                                 startActivity(new Intent(getBaseContext(), HomePage.class));
                             }
@@ -123,5 +125,4 @@ return  params;
     };
     RequestHandler.getInstance(this).addToRequestQueue(stringRequest);
 }
-
 }
