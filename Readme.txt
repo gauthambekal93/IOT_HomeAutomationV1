@@ -1,6 +1,6 @@
-Software Requirements for this project include:
 The project has been collaborated by Gautham Bekal,Laukik Karnavat, Ajinkya Sangvikar.
 
+Software Requirements for this project include:
 Android Studio, Android Phone, Lampp Server, PhpStorm (for writing php scripts in our case), Postman, Remmina Remote Desktop Client, PuTTY, Xming, Netbeans on Raspberry Pi, IP webcam App, VncServer, Virtual Box with Ubuntu.
 
 An Android App named "49erSense" allows the login for 3 different type of users depending on their roles.
