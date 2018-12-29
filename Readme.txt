@@ -1,10 +1,11 @@
 Software Requirements for this project include:
+The project has been collaborated by Gautham Bekal,Laukik Karnavat, Ajinkya Sangvikar.
+
 Android Studio, Android Phone, Lampp Server, PhpStorm (for writing php scripts in our case), Postman, Remmina Remote Desktop Client, PuTTY, Xming, Netbeans on Raspberry Pi, IP webcam App, VncServer, Virtual Box with Ubuntu.
 
 An Android App named "49erSense" allows the login for 3 different type of users depending on their roles.
 
 Customer is a vital part of the implementation as there exists smart devices like actuators/ sensors at his home for various electrical appliances. The data is stored in MySQl database via a php API. 
-
 
 For Customer Live Feed, Weather forecast for 5 days is also implemented.
 
