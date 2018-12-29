@@ -9,7 +9,7 @@ Customer is a vital part of the implementation as there exists smart devices lik
 
 For Customer Live Feed, Weather forecast for 5 days is also implemented.
 
-A raspberry pi has been used which periodically pulls data from the consumer server and simulates smart home appliances according to the status available on MySql db.
+Raspberry pi has been used which periodically pulls data from the consumer server and simulates smart home appliances according to the status available on MySql db.
 
 The raspberry pi simultaneously calculates the power used and sends the device sttus and power consumption units to the utlity and power generator servers.
 
@@ -18,4 +18,9 @@ Utility company can access the status of Customer and show data.
 Power Generator fetches the data from the MySQL database of Customer and plots a realtime Barchart for the power consumption according to the status of Appliances.
 
 Accomplishments:
+An android app for controlling the home appliances wirelessly.
+Simulation of smart home deivices using raspberry pi and breadboard.
+Created an intranet connection using router and connected 3 laptops, smartphone, and raspberry pi respectively.
 Three seperate servers namely Consumer, Utility, Power generator on three different laptops.
+Installation of Oracle Virtual Box and Ubuntu on same.
+
