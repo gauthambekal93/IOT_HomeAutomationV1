@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -23,11 +24,15 @@ public class SecuritySystem extends AppCompatActivity {
     Button disarmed;
     Button armedStay;
     Button armedAway;
+    TextView securitystatus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_security_system);
+
+        securitystatus= (TextView) findViewById(R.id.status);
+        securitystatus.setText("System Now is :" + CompleteStatus.SecurityStatus);
 
         disarmed = (Button) findViewById(R.id.disarmed);
         armedStay = (Button) findViewById(R.id.armedStay);
@@ -56,6 +61,8 @@ securityUpdate("DISARMED");
                 securityUpdate("ARMED AWAY");
             }
         });
+
+
     }
 
     public void securityUpdate(final String status) {
@@ -68,8 +75,13 @@ securityUpdate("DISARMED");
                     public void onResponse(String response) {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
+                            JSONObject jsonObject1 = new JSONObject(jsonObject.getString("message"));
+
                             Toast.makeText(getApplicationContext(),
-                                    jsonObject.getString("message"),Toast.LENGTH_SHORT);
+                                    jsonObject.getString("message"),Toast.LENGTH_SHORT).show();
+
+                            Toast.makeText(getApplicationContext(),  jsonObject1.getString("securityType"),Toast.LENGTH_SHORT).show();
+                            set(jsonObject1.getString("securityType"));
                         }
                         catch (Exception e) {
                             e.printStackTrace();
@@ -79,7 +91,7 @@ securityUpdate("DISARMED");
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getBaseContext(),"Unsucessfully Registration",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getBaseContext(),"Unsuccessful Registration",Toast.LENGTH_SHORT).show();
                     }
                 })
         {
@@ -93,5 +105,11 @@ securityUpdate("DISARMED");
         };
         RequestHandler.getInstance(this).addToRequestQueue(stringRequest);
     }
+public void set(String value)
+{
+
+    securitystatus.setText(value);
 }
+}
+
 

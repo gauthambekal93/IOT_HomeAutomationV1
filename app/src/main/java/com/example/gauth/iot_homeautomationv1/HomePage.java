@@ -9,7 +9,17 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class HomePage extends AppCompatActivity {
     ArrayList<String > dropDown= new ArrayList<String>();
@@ -24,6 +34,7 @@ public class HomePage extends AppCompatActivity {
         dropDown.add("Garage Door");
         dropDown.add("Thermostat");
         dropDown.add("Lights");
+        dropDown.add("Live Feed");
         dropDown.add("Video");
         dropDown.add("Locks");
         dropDown.add("Weather");
@@ -58,9 +69,13 @@ public class HomePage extends AppCompatActivity {
                 {
                     startActivity(new Intent(getBaseContext(),Lights.class));
                 }
-                if(spin.getSelectedItem().toString().equals("Video"))
+                if(spin.getSelectedItem().toString().equals("Live Feed"))
                 {
                     startActivity(new Intent(getBaseContext(),LiveFeed.class));
+                }
+                if(spin.getSelectedItem().toString().equals("Video"))
+                {
+                    startActivity(new Intent(getBaseContext(),Video.class));
                 }
                 if(spin.getSelectedItem().toString().equals("Locks"))
                 {
@@ -89,5 +104,344 @@ public class HomePage extends AppCompatActivity {
 
             }
         });
+    getCompleteSecurityStatus();
+    getCompleteWindowStatus();
+   getCompleteGarageStatus();
+    getCompleteElectricApplianceStatus();
+    getCompleteLockStatus();
+    getCompleteLightStatus();
+    getCompleteMotionDetectorStatus();
+    getCompleteThermostatStatus();
+    }
+
+
+    public void getCompleteSecurityStatus() {
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,
+                Constants.URL_STATUS,
+                new Response.Listener<String>() {
+
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+
+                            Toast.makeText(getApplicationContext(),"SECURITY STATUS IS "+
+                                    jsonObject.getString("securityStatus"),Toast.LENGTH_SHORT).show();
+                        CompleteStatus.SecurityStatus = jsonObject.getString("securityStatus");
+                        }
+                        catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getBaseContext(),"Unsuccessful Registration",Toast.LENGTH_SHORT).show();
+                    }
+                })
+        {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params =new HashMap<>();
+                params.put("username",Constants.username);
+                return  params;
+            }
+        };
+        RequestHandler.getInstance(this).addToRequestQueue(stringRequest);
+    }
+
+    public void getCompleteWindowStatus() {
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,
+                Constants.URL_STATUS,
+                new Response.Listener<String>() {
+
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+
+                            JSONObject jsonObject = new JSONObject(response);
+
+                            //Toast.makeText(getApplicationContext(), "TRY IS "+ response.toString(),Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(),"WINDOW STATUS IS "+
+                                    jsonObject.getString("windowStatus"),Toast.LENGTH_SHORT).show();
+                           CompleteStatus.WindowStatus= jsonObject.getString("windowStatus");
+                        }
+                        catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getBaseContext(),"Unsuccessful Registration",Toast.LENGTH_SHORT).show();
+                    }
+                })
+        {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params =new HashMap<>();
+                params.put("username",Constants.username);
+                return  params;
+            }
+        };
+        RequestHandler.getInstance(this).addToRequestQueue(stringRequest);
+    }
+    public void getCompleteGarageStatus() {
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,
+                Constants.URL_STATUS,
+                new Response.Listener<String>() {
+
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            Toast.makeText(getApplicationContext(),
+                                    "Garage Door 1 is "+jsonObject.getString("garageDoor1"),Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(),"Garage Door 2 is "+
+                                    jsonObject.getString("garageDoor2"),Toast.LENGTH_SHORT).show();
+                            CompleteStatus.GarageStatusDoor1= jsonObject.getString("garageDoor1");
+                            CompleteStatus.GarageStatusDoor2= jsonObject.getString("garageDoor2");
+                        }
+                        catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getBaseContext(),"Unsuccessful Registration",Toast.LENGTH_SHORT).show();
+                    }
+                })
+        {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params =new HashMap<>();
+                params.put("username",Constants.username);
+                return  params;
+            }
+        };
+        RequestHandler.getInstance(this).addToRequestQueue(stringRequest);
+    }
+
+    public void getCompleteElectricApplianceStatus()
+    {
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,
+                Constants.URL_STATUS,
+                new Response.Listener<String>() {
+
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            Toast.makeText(getApplicationContext(),
+                                    "FAN is "+jsonObject.getString("fanStatus"),Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(),"REFRIGERATOR is "+
+                                    jsonObject.getString("refrigeratorStatus"),Toast.LENGTH_SHORT).show();
+                            CompleteStatus.FanStatus= jsonObject.getString("fanStatus");
+                            CompleteStatus.RefrigeratorStatus= jsonObject.getString("refrigeratorStatus");
+                        }
+                        catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getBaseContext(),"Unsuccessful Registration",Toast.LENGTH_SHORT).show();
+                    }
+                })
+        {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params =new HashMap<>();
+                params.put("username",Constants.username);
+                return  params;
+            }
+        };
+        RequestHandler.getInstance(this).addToRequestQueue(stringRequest);
+    }
+
+    public void getCompleteLockStatus()
+    {
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,
+                Constants.URL_STATUS,
+                new Response.Listener<String>() {
+
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            Toast.makeText(getApplicationContext(),
+                                    "Front Door "+jsonObject.getString("Lock1status"),Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(),"Back Door "+
+                                    jsonObject.getString("Lock2status"),Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(),"Garage Door "+
+                                    jsonObject.getString("Lock3status"),Toast.LENGTH_SHORT).show();
+
+                            CompleteStatus.FrontLockStatus= jsonObject.getString("Lock1status");
+                            CompleteStatus.BackLockStatus= jsonObject.getString("Lock2status");
+                            CompleteStatus.GarageLockStatus= jsonObject.getString("Lock3status");
+                        }
+                        catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getBaseContext(),"Unsuccessful Registration",Toast.LENGTH_SHORT).show();
+                    }
+                })
+        {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params =new HashMap<>();
+                params.put("username",Constants.username);
+                return  params;
+            }
+        };
+        RequestHandler.getInstance(this).addToRequestQueue(stringRequest);
+    }
+
+    public void getCompleteLightStatus()
+    {
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,
+                Constants.URL_STATUS,
+                new Response.Listener<String>() {
+
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            Toast.makeText(getApplicationContext(),
+                                    "Main Floor Light "+jsonObject.getString("mainfloorlight"),Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(),"Upstairs Light "+
+                                    jsonObject.getString("upstairlight"),Toast.LENGTH_SHORT).show();
+
+                            CompleteStatus.LightStatusMainFlr= jsonObject.getString("mainfloorlight");
+                            CompleteStatus.LightStatusUpstair= jsonObject.getString("upstairlight");
+
+                        }
+                        catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getBaseContext(),"Unsuccessful Registration",Toast.LENGTH_SHORT).show();
+                    }
+                })
+        {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params =new HashMap<>();
+                params.put("username",Constants.username);
+                return  params;
+            }
+        };
+        RequestHandler.getInstance(this).addToRequestQueue(stringRequest);
+    }
+
+    public void getCompleteMotionDetectorStatus()
+    {
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,
+                Constants.URL_STATUS,
+                new Response.Listener<String>() {
+
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            Toast.makeText(getApplicationContext(),
+                                    "Main Floor Motion Detection "+jsonObject.getString("detectorMainFloor"),Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(),"Upstairs Motion Detection "+
+                                    jsonObject.getString("detectorUpstairs"),Toast.LENGTH_SHORT).show();
+
+                            CompleteStatus.MainFloorMotionDetectorStatus =jsonObject.getString("detectorMainFloor");
+                            CompleteStatus.UpstairMotionDetectorStatus =jsonObject.getString("detectorUpstairs");
+                        }
+                        catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getBaseContext(),"Unsuccessful Registration",Toast.LENGTH_SHORT).show();
+                    }
+                })
+        {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params =new HashMap<>();
+                params.put("username",Constants.username);
+                return  params;
+            }
+        };
+        RequestHandler.getInstance(this).addToRequestQueue(stringRequest);
+    }
+
+
+    public void getCompleteThermostatStatus()
+    {
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,
+                Constants.URL_STATUS,
+                new Response.Listener<String>() {
+
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            Toast.makeText(getApplicationContext(),
+                                    "mainFloorMode "+jsonObject.getString("modeMainFloor"),Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(),"mainFloorFan "+
+                                    jsonObject.getString("fanMainFloor"),Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(),
+                                    "upstairsMode "+jsonObject.getString("modeUpstairs"),Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(),"upstairsFan "+
+                                    jsonObject.getString("fanUpstairs"),Toast.LENGTH_SHORT).show();
+
+
+                            CompleteStatus.ThermostatMainFloorModeStatus =jsonObject.getString("modeMainFloor");
+                            CompleteStatus.ThermostatMainFloorFanStatus =jsonObject.getString("fanMainFloor");
+                            CompleteStatus.ThermostatUpstairModeStatus =jsonObject.getString("modeUpstairs");
+                            CompleteStatus.ThermostatUpstairFanStatus =jsonObject.getString("fanUpstairs");
+                        }
+                        catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getBaseContext(),"Unsuccessful Registration",Toast.LENGTH_SHORT).show();
+                    }
+                })
+        {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params =new HashMap<>();
+                params.put("username",Constants.username);
+                return  params;
+            }
+        };
+        RequestHandler.getInstance(this).addToRequestQueue(stringRequest);
     }
 }

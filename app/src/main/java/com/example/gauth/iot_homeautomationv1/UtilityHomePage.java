@@ -1,5 +1,6 @@
 package com.example.gauth.iot_homeautomationv1;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -24,6 +25,8 @@ public class UtilityHomePage extends AppCompatActivity {
     submitCustomerData.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
+            Constants.usernameUtility = enterCustomerName.getText().toString();
+            startActivity(new Intent(getBaseContext(), UtilityApplianceStatus.class));
 
         }
     });

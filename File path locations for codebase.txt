@@ -1,0 +1,4 @@
+ANDROID JAVA FILES:  IOT Smart Home Simulator\app\src\main\java\com\example\gauth\iot_homeautomationv1
+PhpFiles1:  IOT Smart Home Simulator\Backend PHP API\includes
+Php Files2: IOT Smart Home Simulator\Backend PHP API\v1
+RaspberryFiles: To be Added..

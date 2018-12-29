@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="56dp"
+        android:layout_marginBottom="24dp"
         android:text="Disarmed"
         app:layout_constraintBottom_toTopOf="@+id/armedStay"
         app:layout_constraintEnd_toEndOf="parent"
@@ -25,7 +25,7 @@
         android:layout_height="49dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="76dp"
+        android:layout_marginBottom="24dp"
         android:text="ARMED STAY"
         app:layout_constraintBottom_toTopOf="@+id/armedAway"
         app:layout_constraintEnd_toEndOf="parent"
@@ -34,15 +34,15 @@
 
     <Button
         android:id="@+id/armedAway"
-        android:layout_width="253dp"
-        android:layout_height="52dp"
+        android:layout_width="255dp"
+        android:layout_height="49dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="100dp"
+        android:layout_marginBottom="28dp"
         android:text="Armed Away"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.513"
+        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -53,11 +53,27 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="28dp"
-        android:text="Change your Security System Settings "
+        android:text="Change Security System Settings"
         app:layout_constraintBottom_toTopOf="@+id/disarmed"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.718" />
+
+    <TextView
+        android:id="@+id/status"
+        android:layout_width="255dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="28dp"
+        android:text="Status"
+        app:layout_constraintBottom_toTopOf="@+id/disarmed"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.973" />
 </android.support.constraint.ConstraintLayout>

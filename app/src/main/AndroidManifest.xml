@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.gauth.iot_homeautomationv1">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -32,7 +32,11 @@
         <activity android:name=".ElectricAppliance" />
         <activity android:name=".AccountSettings" />
         <activity android:name=".UtilityHomePage" />
-        <activity android:name=".PowerHomePage"></activity>
+        <activity android:name=".PowerHomePage" />
+        <activity android:name=".UtilityApplianceStatus" />
+        <activity android:name=".PowerGeneratorReading" />
+        <activity android:name=".PowerGraph" />
+        <activity android:name=".Video"></activity>
     </application>
 
 </manifest>
